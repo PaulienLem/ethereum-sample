@@ -1,13 +1,20 @@
 package com.example.ethereum;
 
+import com.example.ethereum.utils.Web3jUtils;
 import com.example.ethereum.wrappers.CoachingPlan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.web3j.protocol.core.methods.response.EthAccounts;
-import org.web3j.protocol.core.methods.response.EthCoinbase;
-import org.web3j.protocol.core.methods.response.EthMining;
+
+import org.web3j.crypto.Credentials;
+import org.web3j.crypto.WalletUtils;
+import org.web3j.protocol.core.methods.response.*;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.http.HttpService;
+import org.web3j.tx.Contract;
+
+import java.io.File;
+
+import static org.web3j.tx.ManagedTransaction.GAS_PRICE;
 
 
 @SpringBootApplication
@@ -24,7 +31,12 @@ public class EthereumApplication {
 
 		System.out.println("Client is mining: " + mining.getResult());
 		System.out.println("Coinbase address: " + coinbase.getAddress());
+		System.out.println("Coinbase coins: " + Web3jUtils.getBalanceEther(web3j,  coinbase.getAddress()));
+		System.out.println(accounts.getAccounts().get(0) + " has " + Web3jUtils.getBalanceEther(web3j, accounts.getAccounts().get(0)));
+		System.out.println( accounts.getAccounts().get(1) + " has " + Web3jUtils.getBalanceEther(web3j, accounts.getAccounts().get(1)));
+
 		System.out.println(accounts.getAccounts());
+
 
 	}
 }
