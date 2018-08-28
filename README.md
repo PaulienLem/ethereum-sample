@@ -17,39 +17,22 @@ cd ~
 cd go-ethereum
 make geth
 
-cd ~
-mkdir gethDataDir
-geth account new --datadir ~/gethDataDir
 
-add genesis.json
-{
-	"config": {
-		"chainId": 15,
-		"homesteadBlock": 0,
-		"eip155Block": 0,
-		"eip158Block": 0
-	},
-	"difficulty": "1",
-	"gasLimit": "2100000",
-	"alloc":{
-	        "yourNewlyCreatedAccountAddressMustGoHere": {
-			"balance": "300000"
-		},
-		"yourNewlyCreatedAccountAddressMustGoHere": {
-			"balance": "400000"
-		},
-		"yourNewlyCreatedAccountAddressMustGoHere": {
-			"balance": "500000"
-		}
-	}
-}
+FROM ETHEREUM
+set timezone!
+docker-compose up -d 
+./bootnode.sh
+./genesis.sh
+./runminer.sh
+./runattach.sh
 
-FROM SRC
-geth removedb if needed
-./run-ethereum.sh
 
 FROM CONTRACTS
 ./redeploy-contract.sh
 
 ANYWHERE
  docker run --name some-postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres
+
+https://github.com/vertigobr/ethereum
+
+note to self - wipeall wipes keystore too`
