@@ -1,7 +1,7 @@
 <h2>Setup environment</h2>
 Install Go and Geth
-```
-sudo apt-get update
+
+```sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get install -y build-essential
 sudo apt-get install git
@@ -23,8 +23,7 @@ Install SolC
 Install Web3J
 
 <h2>Start private network</h2>
-```
-./runminer.sh
+```./runminer.sh
 ./runattach.sh
 ```
 
