@@ -1,6 +1,6 @@
 prerequisites: Go, Web3j, Solc
 
-ENV SETUP
+<h2>Setup environment</h2>
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get install -y build-essential
@@ -18,21 +18,17 @@ cd go-ethereum
 make geth
 
 
-FROM ETHEREUM
-set timezone!
-docker-compose up -d 
-./bootnode.sh
-./genesis.sh
+<h2>Start private network</h2>
 ./runminer.sh
 ./runattach.sh
 
+Based on https://github.com/vertigobr/ethereum
 
-FROM CONTRACTS
+
+<h2>Deploy smart contract</h2>
 ./redeploy-contract.sh
 
-ANYWHERE
+<h2>Start database</h2>
  docker run --name some-postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres
 
-https://github.com/vertigobr/ethereum
 
-note to self - wipeall wipes keystore too`
