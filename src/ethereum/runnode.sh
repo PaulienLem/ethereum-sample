@@ -16,7 +16,10 @@ if [[ ! -z $RPC_PORT ]]; then
     RPC_ARG='--rpc --rpcaddr=0.0.0.0 --rpcport 8545 --rpcapi=db,eth,net,web3,personal --rpccorsdomain "*"'
     RPC_PORTMAP="-p $RPC_PORT:8545"
 fi
-BOOTNODE_URL=${BOOTNODE_URL:-$(./getbootnodeurl.sh)}
+ENODE_LINE=$(docker logs ethereum-bootnode 2>&1 | grep enode | head -n 1)
+MYIP=$(docker exec ethereum-bootnode ifconfig eth0 | awk '/inet addr/{print substr($2,6)}')
+ENODE_LINE=$(echo $ENODE_LINE | sed "s/127\.0\.0\.1/$MYIP/g" | sed "s/\[\:\:\]/$MYIP/g")
+BOOTNODE_URL= "enode:${ENODE_LINE#*enode:}"
 if [ ! -f $(pwd)/genesis.json ]; then
     GEN_NONCE="0xeddeadbabeeddead"
     GEN_CHAIN_ID=1981
