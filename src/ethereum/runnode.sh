@@ -13,14 +13,15 @@ docker rm $CONTAINER_NAME
 RPC_PORTMAP=
 RPC_ARG=
 if [[ ! -z $RPC_PORT ]]; then
-#    RPC_ARG='--ws --wsaddr=0.0.0.0 --wsport 8546 --wsapi=db,eth,net,web3,personal --wsorigins "*" --rpc --rpcaddr=0.0.0.0 --rpcport 8545 --rpcapi=db,eth,net,web3,personal --rpccorsdomain "*"'
     RPC_ARG='--rpc --rpcaddr=0.0.0.0 --rpcport 8545 --rpcapi=db,eth,net,web3,personal --rpccorsdomain "*"'
     RPC_PORTMAP="-p $RPC_PORT:8545"
 fi
 BOOTNODE_URL=${BOOTNODE_URL:-$(./getbootnodeurl.sh)}
 if [ ! -f $(pwd)/genesis.json ]; then
-    echo "No genesis.json file found, please run 'genesis.sh'. Aborting."
-    exit
+    GEN_NONCE="0xeddeadbabeeddead"
+    GEN_CHAIN_ID=1981
+    GEN_ALLOC='"0x0000000000000000000000000000000000000001": {"balance": "100000"}, "0xf6165e3ab53a51e974af53b4af28e53f6dc405e2": {"balance": "100000"}'
+    sed "s/\${GEN_NONCE}/$GEN_NONCE/g" src/genesis.json.template | sed "s/\${GEN_ALLOC}/$GEN_ALLOC/g" | sed "s/\${GEN_CHAIN_ID}/$GEN_CHAIN_ID/g" > genesis.json    exit
 fi
 if [ ! -d $DATA_ROOT/keystore ]; then
     echo "$DATA_ROOT/keystore not found, running 'geth init'..."
