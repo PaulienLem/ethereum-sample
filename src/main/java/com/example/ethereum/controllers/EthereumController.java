@@ -63,7 +63,7 @@ public class EthereumController {
         }
     }
 
-    @RequestMapping(value = "/create-account", method = RequestMethod.POST)
+    @RequestMapping(value = "/register-user", method = RequestMethod.POST)
     public void createAccount(@RequestBody Account account) {
         try {
             String file = WalletUtils.generateNewWalletFile(account.getPassword(), new File("/Users/paulien/Documents/Research/ethereum/.ether-miner1/keystore"), true);
