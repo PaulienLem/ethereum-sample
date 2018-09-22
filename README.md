@@ -1,5 +1,7 @@
 <h2>Setup environment</h2>
-Install Go and Geth
+Install Docker
+
+Install  Geth
 
 ```sudo apt-get update
 sudo apt-get upgrade
