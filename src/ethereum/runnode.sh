@@ -5,10 +5,6 @@ MYIP=$(docker exec ethereum-bootnode ifconfig eth0 | awk '/inet addr/{print subs
 ENODE_LINE=$(echo $ENODE_LINE | sed "s/127\.0\.0\.1/$MYIP/g" | sed "s/\[\:\:\]/$MYIP/g")
 BOOTNODE_URL= "enode:${ENODE_LINE#*enode:}"
 
-if [ ! -d  ${DATA_ROOT:-"$(pwd)/.ether-miner1"}/keystore ]; then
-    docker run --rm -v ${DATA_ROOT:-"$(pwd)/.ether-miner1"}:/root/.ethereum -v $(pwd)/genesis.json:/opt/genesis.json "ethereum/client-go:v1.8.12" init /opt/genesis.json
-fi
-
 docker run -d --name "ethereum-miner1" \
     --network ethereum -p 8545:8545 -v  ${DATA_ROOT:-"$(pwd)/.ether-miner1"}:/root/.ethereum \
     -v ${DATA_HASH:-"$(pwd)/.ethash"}:/root/.ethash \
