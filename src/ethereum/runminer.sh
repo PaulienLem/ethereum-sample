@@ -1,6 +1,5 @@
 #!/bin/bash
-docker stop ethereum-bootnode
-docker rm ethereum-bootnode
+
 DATA_ROOT=${DATA_ROOT:-$(pwd)}
 mkdir -p $DATA_ROOT/.bootnode
 
