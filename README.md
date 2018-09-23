@@ -3,12 +3,12 @@
 
 <h2>Prerequisites</h2>
 <li> Java (tested with java8) </li>
-<li> Node (tested with 9.11.1)) </li>
-<li> git (apt-get install git-core)) </li>
-<li>  Python 2.X (Sudo apt install python-minimal)) </li>
-<li>  GCC (Sudo apt install gcc)) </li>
-<li> build-essential (sudo apt-get install build-essential)) </li>
-<li> Maven (Sudo apt-get install maven)) </li>
+<li> Node (tested with 9.11.1) </li>
+<li> git (apt-get install git-core) </li>
+<li>  Python 2.X (Sudo apt install python-minimal) </li>
+<li>  GCC (Sudo apt install gcc) </li>
+<li> build-essential (sudo apt-get install build-essential) </li>
+<li> Maven (Sudo apt-get install maven) </li>
 
 <h2>Setup Environment</h2>
 <li> Install Docker </li>
