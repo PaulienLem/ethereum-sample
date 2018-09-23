@@ -27,19 +27,18 @@ Install Web3J
 
 ##Run application
 
-###Start Ethereum
-```
-./runminer.sh
-./runattach.sh
-```
+###Running Ethereum
 
-First time you run these, DAG gets generated, which might take a while. As long as the DAG generation is processing, your blockchain might be slower. 
+####Startup 
 
-Teardown
+Run ./runminer.sh to start the miner node. Check the logs by running 'docker ps' to get the container ID and then 'docker logs CONTAINER_ID -f'. 
+When the DAG generation process has finished and the logs say 'commit new mining work', run ./runattach.sh to open RPC connection with the miner node.
+Generating DAG usually takes a while. 
+
+#### Teardown
 ```
 ./wipeall.sh
 ```
-Based on https://github.com/vertigobr/ethereum
 
 ###Spin up database
 docker run --name some-postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres
@@ -53,3 +52,6 @@ docker run --name some-postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d po
 ###Test API
 - POST to localhost:9000/ to create a smart contract (might take a few minutes)
 - GET to localhost:9000/ to get the coachee of the smart contract created
+
+
+Based on https://github.com/vertigobr/ethereum

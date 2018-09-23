@@ -11,4 +11,4 @@ docker run --rm -v $DATA_ROOT/.bootnode:/opt/bootnode "ethereum/client-go:alltoo
 docker run -d --name ethereum-bootnode \
     -v $DATA_ROOT/.bootnode:/opt/bootnode --network ethereum "ethereum/client-go:alltools-v1.8.12" bootnode --nodekey /opt/bootnode/boot.key --verbosity=3
 
-./runnode.sh "miner1" --mine --minerthreads=1 --etherbase=${ETHERBASE:-"0x0000000000000000000000000000000000000001"}
+./runnode.sh
