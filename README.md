@@ -33,6 +33,8 @@ Install Web3J
 ./runattach.sh
 ```
 
+First time you run these, DAG gets generated, which might take a while. As long as the DAG generation is processing, your blockchain might be slower. 
+
 Teardown
 ```
 ./wipeall.sh
@@ -49,5 +51,5 @@ docker run --name some-postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d po
 ./redeploy-contract.sh
 
 ###Test API
-- POST to localhost:9000/ to create a smart contract
+- POST to localhost:9000/ to create a smart contract (might take a few minutes)
 - GET to localhost:9000/ to get the coachee of the smart contract created
