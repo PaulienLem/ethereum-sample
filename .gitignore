@@ -38,7 +38,9 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
-
+mvnw
+mvnw.cmd
+src/.DS_Store
 
 # End of https://www.gitignore.io/api/maven
 
