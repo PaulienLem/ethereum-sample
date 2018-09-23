@@ -6,8 +6,6 @@ DETACH_FLAG=${DETACH_FLAG:-"-d"}
 CONTAINER_NAME="ethereum-$NODE_NAME"
 DATA_ROOT=${DATA_ROOT:-"$(pwd)/.ether-$NODE_NAME"}
 DATA_HASH=${DATA_HASH:-"$(pwd)/.ethash"}
-echo "Destroying old container $CONTAINER_NAME..."
-echo " $(pwd) WOULD BE THE PASSWORD"
 docker stop $CONTAINER_NAME
 docker rm $CONTAINER_NAME
 RPC_PORTMAP=
