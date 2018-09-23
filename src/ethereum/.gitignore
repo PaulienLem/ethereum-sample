@@ -1,5 +1,4 @@
 .ethash
 .bootnode
 setenv.sh
-genesis.json
 

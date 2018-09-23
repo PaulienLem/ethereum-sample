@@ -14,13 +14,6 @@ MYIP=$(docker exec ethereum-bootnode ifconfig eth0 | awk '/inet addr/{print subs
 ENODE_LINE=$(echo $ENODE_LINE | sed "s/127\.0\.0\.1/$MYIP/g" | sed "s/\[\:\:\]/$MYIP/g")
 BOOTNODE_URL= "enode:${ENODE_LINE#*enode:}"
 
-if [ ! -f $(pwd)/genesis.json ]; then
-    GEN_NONCE="0xeddeadbabeeddead"
-    GEN_CHAIN_ID=1981
-    GEN_ALLOC='"0x0000000000000000000000000000000000000001": {"balance": "100000"}, "0xf6165e3ab53a51e974af53b4af28e53f6dc405e2": {"balance": "100000"}'
-    sed "s/\${GEN_NONCE}/$GEN_NONCE/g" src/genesis.json.template | sed "s/\${GEN_ALLOC}/$GEN_ALLOC/g" | sed "s/\${GEN_CHAIN_ID}/$GEN_CHAIN_ID/g" > genesis.json    exit
-fi
-
 if [ ! -d $DATA_ROOT/keystore ]; then
     docker run --rm -v $DATA_ROOT:/root/.ethereum -v $(pwd)/genesis.json:/opt/genesis.json "ethereum/client-go:v1.8.12" init /opt/genesis.json
 fi
