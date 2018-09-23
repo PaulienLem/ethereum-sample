@@ -41,6 +41,7 @@ buildNumber.properties
 mvnw
 mvnw.cmd
 src/.DS_Store
+src/main/.DS_Store
 
 # End of https://www.gitignore.io/api/maven
 
