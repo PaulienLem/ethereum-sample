@@ -3,9 +3,7 @@
 DATA_ROOT=${DATA_ROOT:-$(pwd)}
 mkdir -p $DATA_ROOT/.bootnode
 
-if [ ! -f $DATA_ROOT/.bootnode/boot.key ]; then
-    docker run --rm -v $DATA_ROOT/.bootnode:/opt/bootnode "ethereum/client-go:alltools-v1.8.12" bootnode --genkey /opt/bootnode/boot.key
-fi
+docker run --rm -v $DATA_ROOT/.bootnode:/opt/bootnode "ethereum/client-go:alltools-v1.8.12" bootnode --genkey /opt/bootnode/boot.key
 
 [ ! "$(docker network ls | grep ethereum)" ] && docker network create ethereum
 [[ -z $BOOTNODE_SERVICE ]] && BOOTNODE_SERVICE="127.0.0.1"
