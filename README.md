@@ -1,8 +1,18 @@
 #Ethereum Sample
 
+
+##Prerequisites
+- Java (tested with java8)
+- Node (tested with 9.11.1)
+- git (apt-get install git-core)
+- Python 2.X (Sudo apt install python-minimal)
+- GCC (Sudo apt install gcc)
+- build-essential (sudo apt-get install build-essential)
+- Maven (Sudo apt-get install maven)
+
 ##Setup Environment
 Install Docker
-Install Go and Geth
+Install Geth
 
 ```sudo apt-get update
 sudo apt-get upgrade
@@ -22,8 +32,14 @@ make geth
 ```
 
 Install SolC
+```aidl
+Npm install -g solc
+```
 
 Install Web3J
+```aidl
+Npm install -g web3
+```
 
 ##Run application
 
