@@ -11,8 +11,8 @@
 <li> Maven (Sudo apt-get install maven)) </li>
 
 <h2>Setup Environment</h2>
-<li> Install Docker) </li>
-<li> Install Geth) </li>
+<li> Install Docker </li>
+<li> Install Geth </li>
 
 ```sudo apt-get update
 sudo apt-get upgrade
@@ -45,13 +45,13 @@ Npm install -g web3
 
 <h3>Running Ethereum</h3>
 
-Startup 
+<h4> Startup </h4>
 
 Run ./runminer.sh to start the miner node. Check the logs by running 'docker ps' to get the container ID and then 'docker logs CONTAINER_ID -f'. 
 When the DAG generation process has finished and the logs say 'commit new mining work', run ./runattach.sh to open RPC connection with the miner node.
 Generating DAG usually takes a while. 
 
-Teardown
+<h4> Teardown </h4>
 ```
 ./wipeall.sh
 ```
@@ -66,8 +66,8 @@ docker run --name some-postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d po
 ./redeploy-contract.sh
 
 <h3>Test API</h3>
-- POST to localhost:9000/ to create a smart contract (might take a few minutes)
-- GET to localhost:9000/ to get the coachee of the smart contract created
+<li> POST to localhost:9000/ to create a smart contract (might take a few minutes) </li>
+<li> GET to localhost:9000/ to get the coachee of the smart contract created </li>
 
 
 Based on https://github.com/vertigobr/ethereum
