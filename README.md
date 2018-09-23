@@ -1,7 +1,7 @@
-#Ethereum Sample
+<h1>Ethereum Sample</h1>
 
 
-##Prerequisites
+<h2>Prerequisites</h2>
 - Java (tested with java8)
 - Node (tested with 9.11.1)
 - git (apt-get install git-core)
@@ -10,9 +10,9 @@
 - build-essential (sudo apt-get install build-essential)
 - Maven (Sudo apt-get install maven)
 
-##Setup Environment
-Install Docker
-Install Geth
+<h2>Setup Environment</h2>
+- Install Docker
+- Install Geth
 
 ```sudo apt-get update
 sudo apt-get upgrade
@@ -31,41 +31,41 @@ cd go-ethereum
 make geth
 ```
 
-Install SolC
+- Install SolC
 ```aidl
 Npm install -g solc
 ```
 
-Install Web3J
+- Install Web3J
 ```aidl
 Npm install -g web3
 ```
 
-##Run application
+<h2>Run application</h2>
 
-###Running Ethereum
+<h3>Running Ethereum</h3>
 
-####Startup 
+Startup 
 
 Run ./runminer.sh to start the miner node. Check the logs by running 'docker ps' to get the container ID and then 'docker logs CONTAINER_ID -f'. 
 When the DAG generation process has finished and the logs say 'commit new mining work', run ./runattach.sh to open RPC connection with the miner node.
 Generating DAG usually takes a while. 
 
-#### Teardown
+Teardown
 ```
 ./wipeall.sh
 ```
 
-###Spin up database
+<h3>Spin up database</h3>
 docker run --name some-postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres
 
 
-###Start the Springboot app
+<h3>Start the Springboot app</h3>
 
-###Deploy smart contract
+<h3>Deploy smart contract</h3>
 ./redeploy-contract.sh
 
-###Test API
+<h3>Test API</h3>
 - POST to localhost:9000/ to create a smart contract (might take a few minutes)
 - GET to localhost:9000/ to get the coachee of the smart contract created
 
