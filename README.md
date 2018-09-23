@@ -1,4 +1,7 @@
-<h2>Setup environment</h2>
+#Ethereum Sample
+
+##Setup Environment
+Install Docker
 Install Go and Geth
 
 ```sudo apt-get update
@@ -22,18 +25,29 @@ Install SolC
 
 Install Web3J
 
-<h2>Start private network</h2>
-```./runminer.sh
+##Run application
+
+###Start Ethereum
+```
+./runminer.sh
 ./runattach.sh
 ```
 
+Teardown
+```
+./wipeall.sh
+```
 Based on https://github.com/vertigobr/ethereum
 
-
-<h2>Deploy smart contract</h2>
-./redeploy-contract.sh
-
-<h2>Start database</h2>
+###Spin up database
 docker run --name some-postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres
 
 
+###Start the Springboot app
+
+###Deploy smart contract
+./redeploy-contract.sh
+
+###Test API
+- POST to localhost:9000/ to create a smart contract
+- GET to localhost:9000/ to get the coachee of the smart contract created

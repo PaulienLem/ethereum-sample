@@ -56,7 +56,7 @@ public class EthereumController {
     public void createSmartContract() {
         try {
             Web3j web3j = Web3j.build(new HttpService());
-            CoachingPlan coachingPlan = CoachingPlan.deploy(web3j, WalletUtils.loadCredentials("sweetmustard", new File("/Users/paulien/Documents/Research/ethereum-sample/src/ethereum/.ether-miner1/keystore/UTC--2018-08-28T11-53-50.666000000Z--2549f66398d9b13a322ab2569ae4b5c85c2f8635.json")), GAS_PRICE, BigInteger.valueOf(2934465)).send();
+            CoachingPlan coachingPlan = CoachingPlan.deploy(web3j, WalletUtils.loadCredentials("sweetmustard", new File(System.getProperty("user.dir") + "/src/ethereum/.ether-miner1/keystore/UTC--2018-08-28T11-53-50.666000000Z--2549f66398d9b13a322ab2569ae4b5c85c2f8635.json")), GAS_PRICE, BigInteger.valueOf(2934465)).send();
             contractAddressRepository.save(new ContractAddress(coachingPlan.coachee().sendAsync().get(), coachingPlan.getContractAddress()));
         } catch (Exception e) {
             e.printStackTrace();
