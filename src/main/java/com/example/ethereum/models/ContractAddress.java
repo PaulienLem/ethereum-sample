@@ -7,9 +7,10 @@ import javax.persistence.*;
 @Entity
 public class ContractAddress {
 
-    public ContractAddress(String coachee, String contractAddress){
-        this.coachee=coachee;
-        this.contractAddress=contractAddress;
+    public ContractAddress(String coachee, String contractAddress, String createdBy) {
+        this.coachee = coachee;
+        this.contractAddress = contractAddress;
+        this.createdBy = createdBy;
     }
 
     public ContractAddress(){}
@@ -23,6 +24,9 @@ public class ContractAddress {
 
     @Column()
     String contractAddress;
+
+    @Column()
+    String createdBy;
 
     public long getId() {
         return id;
@@ -46,5 +50,13 @@ public class ContractAddress {
 
     public void setContractAddress(String contractAddress) {
         this.contractAddress = contractAddress;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
     }
 }

@@ -43,10 +43,14 @@ public class EthereumController {
     private AccountRepository accountRepository;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String getCoachee() {
+    public String getCoachee(@RequestParam String username) {
         String returnString = "";
         try {
-            returnString = getSmartContract().coachee().sendAsync().get();
+            Account account = accountRepository.findOneByUsername(username);
+            Web3j web3j = Web3j.build(new HttpService());
+            ContractAddress address = contractAddressRepository.findOneByCreatedBy(account.getFile());
+            CoachingPlan plan =  CoachingPlan.load(address.getContractAddress(), web3j, WalletUtils.loadCredentials(account.getPassword(), new File(System.getProperty("user.dir") + "/src/ethereum/.ether-miner1/keystore/" + account.getFile())),GAS_PRICE, Contract.GAS_LIMIT);
+            returnString = plan.coachee().sendAsync().get();
         } catch(Exception e){
             e.printStackTrace();
         }
@@ -54,12 +58,12 @@ public class EthereumController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public void createSmartContract(@RequestParam String username) {
+    public void createSmartContract(@RequestParam String username, @RequestParam String coach, @RequestParam String coachee) {
         try {
             Web3j web3j = Web3j.build(new HttpService());
             Account account = accountRepository.findOneByUsername(username);
-            CoachingPlan coachingPlan = CoachingPlan.deploy(web3j, WalletUtils.loadCredentials(account.getPassword(), new File(System.getProperty("user.dir") + "/src/ethereum/.ether-miner1/keystore/" + account.getFile())), GAS_PRICE, BigInteger.valueOf(2934465)).send();
-            contractAddressRepository.save(new ContractAddress(coachingPlan.coachee().sendAsync().get(), coachingPlan.getContractAddress()));
+            CoachingPlan coachingPlan = CoachingPlan.deploy(web3j, WalletUtils.loadCredentials(account.getPassword(), new File(System.getProperty("user.dir") + "/src/ethereum/.ether-miner1/keystore/" + account.getFile())), GAS_PRICE, BigInteger.valueOf(2934465), coach, coachee).send();
+            contractAddressRepository.save(new ContractAddress(coachingPlan.coachee().sendAsync().get(), coachingPlan.getContractAddress(), account.getFile()));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -71,25 +75,12 @@ public class EthereumController {
             String file = WalletUtils.generateNewWalletFile(account.getPassword(), new File(System.getProperty("user.dir")  + "/src/ethereum/.ether-miner1/keystore"), true);
             account.setFile(file);
             accountRepository.save(account);
-            Web3j web3j = Web3j.build(new HttpService());
             demoTransfer(
                     (WalletUtils.loadCredentials("sweetmustard", new File(System.getProperty("user.dir") + "/src/ethereum/.ether-miner1/keystore/UTC--2018-08-28T11-53-50.666000000Z--2549f66398d9b13a322ab2569ae4b5c85c2f8635.json"))),
                     (WalletUtils.loadCredentials(account.getPassword(), new File(System.getProperty("user.dir") + "/src/ethereum/.ether-miner1/keystore/" + account.getFile())).getAddress()),
                         BigInteger.valueOf(1000000000000000000l));
         } catch (Exception e) {
             e.printStackTrace();
-        }
-    }
-
-    private CoachingPlan getSmartContract() {
-        try {
-            Web3j web3j = Web3j.build(new HttpService());
-            ContractAddress address = contractAddressRepository.findOneByCoachee("Paulien");
-            System.out.println(address.getContractAddress());
-            return CoachingPlan.load(address.getContractAddress(), web3j, WalletUtils.loadCredentials("sweetmustard", new File(System.getProperty("user.dir") + "/src/ethereum/.ether-miner1/keystore/UTC--2018-08-28T11-53-50.666000000Z--2549f66398d9b13a322ab2569ae4b5c85c2f8635.json")),GAS_PRICE, Contract.GAS_LIMIT);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return  null;
         }
     }
 

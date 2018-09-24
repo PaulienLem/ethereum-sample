@@ -5,9 +5,9 @@ contract CoachingPlan {
     string public coachee;
     string[] public goals;
 
-    function CoachingPlan(){
-        coach = "Mike";
-        coachee = "Paulien";
+    function CoachingPlan(string _coach, string _coachee){
+        coach = _coach;
+        coachee = _coachee;
     }
 
     function addGoal(string _goal) {

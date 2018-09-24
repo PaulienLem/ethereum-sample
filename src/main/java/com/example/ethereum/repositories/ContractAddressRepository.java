@@ -7,4 +7,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface ContractAddressRepository extends CrudRepository<ContractAddress, Long>{
     ContractAddress findOneByCoachee (String coachee);
+    ContractAddress findOneByCreatedBy (String keyfile);
 }
