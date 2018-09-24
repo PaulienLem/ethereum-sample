@@ -33,9 +33,6 @@ public class EthereumApplication {
 		System.out.println("Coinbase address: " + coinbase.getAddress());
 		System.out.println("Coinbase coins: " + Web3jUtils.getBalanceEther(web3j,  coinbase.getAddress()));
 		System.out.println(accounts.getAccounts().get(0) + " has " + Web3jUtils.getBalanceEther(web3j, accounts.getAccounts().get(0)));
-		System.out.println( accounts.getAccounts().get(1) + " has " + Web3jUtils.getBalanceEther(web3j, accounts.getAccounts().get(1)));
-		System.out.println( accounts.getAccounts().get(2) + " has " + Web3jUtils.getBalanceEther(web3j, accounts.getAccounts().get(2)));
-
 		System.out.println(accounts.getAccounts());
 	}
 }
