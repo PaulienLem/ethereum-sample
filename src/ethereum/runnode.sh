@@ -7,5 +7,4 @@ docker run -d --name "ethereum-miner1" \
     --network ethereum -p 8545:8545 -v  ${DATA_ROOT:-"$(pwd)/.ether-miner1"}:/root/.ethereum \
     -v ${DATA_HASH:-"$(pwd)/.ethash"}:/root/.ethash \
     -v $(pwd)/genesis.json:/opt/genesis.json \
-    -p :8545 \
-    "ethereum/client-go:v1.8.12" --bootnodes="enode:${ENODE_LINE#*enode:}" --rpc --rpcaddr=0.0.0.0 --rpcport 8545 --rpcapi=db,eth,net,web3,personal --rpccorsdomain "*" --cache=512 --verbosity=4 --maxpeers=3 --mine --minerthreads=1 --etherbase=${ETHERBASE:-"0x0000000000000000000000000000000000000001"}
+    "ethereum/client-go:v1.8.12" --bootnodes="enode:${ENODE_LINE#*enode:}" --rpc --rpcaddr=0.0.0.0 --rpcport 8545 --rpcapi=db,eth,net,web3,personal --rpccorsdomain "*" --cache=512 --verbosity=4 --mine -etherbase=${ETHERBASE:-"0x2549f66398d9b13a322ab2569ae4b5c85c2f8635"}
