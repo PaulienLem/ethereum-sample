@@ -43,32 +43,35 @@ Npm install -g web3
 
 <h2>Run application</h2>
 
-<h3>Running Ethereum</h3>
+<h3>1. Running Ethereum</h3>
 
 <h4> Startup </h4>
 
-Run `````./runminer.sh````` to start the miner node. Check the logs by running ```docker ps``` to get the container ID and then ```docker logs CONTAINER_ID -f```. 
+Fron the ethereum folder, run `````./runminer.sh````` to start the miner node. Check the logs by running ```docker ps``` to get the container ID and then ```docker logs CONTAINER_ID -f```. 
 When the DAG generation process has finished and the logs say 'commit new mining work', run `````./runattach.sh````` to open RPC connection with the miner node.
 Generating DAG usually takes a while. 
 
-<h3>Spin up database</h3>
-`````docker run --name some-postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres`````
+<h3>2. Spin up database</h3>
+```aidl
+docker run --name some-postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres
+```
+<h3>3. Start the Springboot app</h3>
 
-
-<h3>Start the Springboot app</h3>
-
-<h3>Deploy smart contract</h3>
+<h3>4. Deploy smart contract</h3>
+From the contracts folder, run 
+```aidl
 ./redeploy-contract.sh
+```
 
-<h3>Test API</h3>
-<li> POST to localhost:9000/ to create a smart contract (might take a few minutes) </li>
-<li> GET to localhost:9000/ to get the coachee of the smart contract created </li>
-
+<h3>5. Test API</h3>
+<li> POST to localhost:9000/register-user to create a user (request body: { "username":"Bob", "password":"some-password"} </li>
+<li> POST to localhost:9000/ to create a contract (request body: {"creator":"Bob", "coach":"coach","coachee":"coachee"}. Make sure the creator has an account (so Bob in this case)</li>
+<li> GET to localhost:9000?username=Bob to get the coachee from the smart contract (again make sure to pass the name of the creator of the contract, which is Bob here)
 
 <h3> Teardown </h3>
 
 ```aidl
-./wipeall.sh
+./src/ethereum/wipeall.sh
 ```
 
 
