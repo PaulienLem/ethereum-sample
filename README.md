@@ -45,8 +45,6 @@ Npm install -g web3
 
 <h3>1. Running Ethereum</h3>
 
-<h4> Startup </h4>
-
 Fron the ethereum folder, run `````./runminer.sh````` to start the miner node. Check the logs by running ```docker ps``` to get the container ID and then ```docker logs CONTAINER_ID -f```. 
 When the DAG generation process has finished and the logs say 'commit new mining work', run `````./runattach.sh````` to open RPC connection with the miner node.
 Generating DAG usually takes a while. 
@@ -71,11 +69,11 @@ From the contracts folder, run
 <li> GET to localhost:9000?username=Bob to get the coachee from the smart contract (again make sure to pass the name of the creator of the contract, which is Bob here)
 
 <h3> Teardown </h3>
-From src/etheruem run 
+From src/ethereum run 
 
 ```aidl
 ./wipeall.sh
 ```
 
 
-Based on https://github.com/vertigobr/ethereum
+The ethereum-part is an (over)simplification of https://github.com/vertigobr/ethereum
