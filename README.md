@@ -51,14 +51,8 @@ Run `````./runminer.sh````` to start the miner node. Check the logs by running `
 When the DAG generation process has finished and the logs say 'commit new mining work', run `````./runattach.sh````` to open RPC connection with the miner node.
 Generating DAG usually takes a while. 
 
-<h4> Teardown </h4>
-
-```aidl
-./wipeall.sh
-```
-
 <h3>Spin up database</h3>
-docker run --name some-postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres
+`````docker run --name some-postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres`````
 
 
 <h3>Start the Springboot app</h3>
@@ -69,6 +63,13 @@ docker run --name some-postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d po
 <h3>Test API</h3>
 <li> POST to localhost:9000/ to create a smart contract (might take a few minutes) </li>
 <li> GET to localhost:9000/ to get the coachee of the smart contract created </li>
+
+
+<h3> Teardown </h3>
+
+```aidl
+./wipeall.sh
+```
 
 
 Based on https://github.com/vertigobr/ethereum
