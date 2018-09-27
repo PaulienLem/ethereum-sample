@@ -47,12 +47,13 @@ Npm install -g web3
 
 <h4> Startup </h4>
 
-Run ./runminer.sh to start the miner node. Check the logs by running 'docker ps' to get the container ID and then 'docker logs CONTAINER_ID -f'. 
-When the DAG generation process has finished and the logs say 'commit new mining work', run ./runattach.sh to open RPC connection with the miner node.
+Run `````./runminer.sh````` to start the miner node. Check the logs by running ```docker ps``` to get the container ID and then ```docker logs CONTAINER_ID -f```. 
+When the DAG generation process has finished and the logs say 'commit new mining work', run `````./runattach.sh````` to open RPC connection with the miner node.
 Generating DAG usually takes a while. 
 
 <h4> Teardown </h4>
-```
+
+```aidl
 ./wipeall.sh
 ```
 
