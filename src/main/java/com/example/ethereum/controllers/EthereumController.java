@@ -1,5 +1,6 @@
 package com.example.ethereum.controllers;
 
+import com.example.ethereum.DTO.ContractCreationDto;
 import com.example.ethereum.models.Account;
 import com.example.ethereum.models.ContractAddress;
 import com.example.ethereum.repositories.AccountRepository;
@@ -58,11 +59,11 @@ public class EthereumController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
-    public void createSmartContract(@RequestParam String username, @RequestParam String coach, @RequestParam String coachee) {
+    public void createSmartContract(@RequestBody ContractCreationDto contractCreationDto) {
         try {
             Web3j web3j = Web3j.build(new HttpService());
-            Account account = accountRepository.findOneByUsername(username);
-            CoachingPlan coachingPlan = CoachingPlan.deploy(web3j, WalletUtils.loadCredentials(account.getPassword(), new File(System.getProperty("user.dir") + "/src/ethereum/.ether-miner1/keystore/" + account.getFile())), GAS_PRICE, BigInteger.valueOf(2934465), coach, coachee).send();
+            Account account = accountRepository.findOneByUsername(contractCreationDto.getCreator());
+            CoachingPlan coachingPlan = CoachingPlan.deploy(web3j, WalletUtils.loadCredentials(account.getPassword(), new File(System.getProperty("user.dir") + "/src/ethereum/.ether-miner1/keystore/" + account.getFile())), GAS_PRICE, BigInteger.valueOf(2934465), contractCreationDto.getCoach(), contractCreationDto.getCoachee()).send();
             contractAddressRepository.save(new ContractAddress(coachingPlan.coachee().sendAsync().get(), coachingPlan.getContractAddress(), account.getFile()));
         } catch (Exception e) {
             e.printStackTrace();
